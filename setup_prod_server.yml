@@ -109,12 +109,40 @@
       community.docker.docker_compose_v2:
         project_src: /opt/containers/traefik
         state: present
-        build: no
+        build: never
         remove_orphans: yes
+      register: traefik_output
+
+    - name: Show Traefik deployment results
+      ansible.builtin.debug:
+        var: traefik_output
 
     - name: Start Portainer container
       community.docker.docker_compose_v2:
         project_src: /opt/containers/portainer
         state: present
-        build: no
+        build: never
         remove_orphans: yes
+      register: portainer_output
+
+    - name: Show Portainer deployment results
+      ansible.builtin.debug:
+        var: portainer_output
+
+    - name: Verify that Traefik service is running
+      ansible.builtin.assert:
+        that:
+          - traefik_container.State == 'running'
+      vars:
+        traefik_container: >-
+          {{ traefik_output.containers | selectattr("Service", "equalto", "traefik") | first }}
+      ignore_errors: yes
+
+    - name: Verify that Portainer agent service is running
+      ansible.builtin.assert:
+        that:
+          - portainer_agent_container.State == 'running'
+      vars:
+        portainer_agent_container: >-
+          {{ portainer_output.containers | selectattr("Service", "equalto", "portainer-agent") | first }}
+      ignore_errors: yes
