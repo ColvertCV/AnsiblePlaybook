@@ -2,3 +2,4 @@ servers:
   hosts:
     colvert.colvert.ai:
       ansible_user: root
+      ansible_ssh_pass: p0R$raqmpF0c8Dk#&NdYqKHaRQRDScdT0XNAtT^ZDR4085Kj$WDs^UbdhPTgA6*X
