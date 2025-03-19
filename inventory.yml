@@ -1,3 +1,4 @@
 servers:
   hosts:
     colvert.colvert.ai:
+      ansible_user: root
