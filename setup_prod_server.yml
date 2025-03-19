@@ -75,4 +75,3 @@
         src: containers/
         dest: /opt/containers/
         mode: '0755'
-        recursive: true
