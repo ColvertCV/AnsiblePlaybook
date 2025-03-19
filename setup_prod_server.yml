@@ -70,8 +70,31 @@
         mode: '0755'
       when: not containers_dir.stat.exists
 
-    - name: Copy containers directory contents
-      copy:
-        src: containers/
-        dest: /opt/containers/
+    - name: Create container subdirectories
+      file:
+        path: "{{ item }}"
+        state: directory
         mode: '0755'
+      with_items:
+        - /opt/containers/traefik
+        - /opt/containers/portainer
+      when: not containers_dir.stat.exists
+
+    - name: Copy and process Traefik compose file
+      template:
+        src: containers/traefik/compose.yml
+        dest: /opt/containers/traefik/compose.yml
+        mode: '0755'
+
+    - name: Copy and process Portainer compose file
+      template:
+        src: containers/portainer/compose.yml
+        dest: /opt/containers/portainer/compose.yml
+        mode: '0755'
+
+    - name: Create letsencrypt directory for Traefik
+      file:
+        path: /opt/containers/traefik/letsencrypt
+        state: directory
+        mode: '0755'
+      when: not containers_dir.stat.exists

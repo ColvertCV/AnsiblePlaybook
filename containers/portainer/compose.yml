@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     environment:
       EDGE: "1"
-      EDGE_ID: "dd5b5e19-30d4-4233-a752-2906cdca8c22"
-      EDGE_KEY: "aHR0cHM6Ly9wb3J0YWluZXIuaW5mcmEuY29sdmVydC5haXxlZGdlLmluZnJhLmNvbHZlcnQuYWk6ODAwMHwyWHJCcVFVaUhJM2FMb2svemg0Y1NsSEk5NEVMbUM5STdIUG5KenFEMlhzPXwyMQ"
+      EDGE_ID: "{{ portainer_edge_id }}"
+      EDGE_KEY: "{{ portainer_edge_key }}"
       EDGE_INSECURE_POLL: "1"
     networks:
       - colvert
@@ -18,7 +18,7 @@ services:
     labels:
       # Traefik configuration for the Portainer Agent
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer-agent-router.rule=Host(`portainer.jenkins.colvert.ai`)"
+      - "traefik.http.routers.portainer-agent-router.rule=Host(`{{ portainer_domain }}`)"
       - "traefik.http.routers.portainer-agent-router.entrypoints=websecure"
       - "traefik.http.routers.portainer-agent-router.tls=true"
       - "traefik.http.routers.portainer-agent-router.tls.certresolver=colvertresolver"

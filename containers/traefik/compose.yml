@@ -18,7 +18,7 @@ services:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.colvertresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.colvertresolver.acme.email=web@colvert.ai"
+      - "--certificatesresolvers.colvertresolver.acme.email={{ traefik_email }}"
       - "--certificatesresolvers.colvertresolver.acme.storage=/letsencrypt/acme.json"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
@@ -27,7 +27,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.middlewares.forwardedHeaders.headers.customRequestHeaders.X-Forwarded-Proto=https"
       #Internal Traefik Dashboard 
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.langfuse.colvert.ai`)"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.langfuse.{{ traefik_domain }}`)"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.middlewares=auth"
@@ -36,7 +36,7 @@ services:
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
       #Middleware: Auth Traefik Dashboard
-      - "traefik.http.middlewares.auth.basicauth.users=Geoffroy:$$apr1$$qih91p2b$$0VXS0o7WHovjBl7lmSgkp/,souka:$$apr1$$d2ib0pql$$lKemxpz59PN4zAngIGhHf/,poriol:$$apr1$$rl68ynp4$$0yOkzZDYVFtKEDzGyAskC/,Fraj:$$apr1$$1xj7bpe8$$U8uiOhEqrgkkGNe9TokSf/,admin-sec:$$apr1$$7gIBlqTq$$8YJriBEnvhi9YfVqSwyYW/"
+      - "traefik.http.middlewares.auth.basicauth.users={% for user in traefik_auth_users %}{{ user.username }}:{{ user.password }}{% if not loop.last %},{% endif %}{% endfor %}"
     ports:
       - target: 80
         published: 80

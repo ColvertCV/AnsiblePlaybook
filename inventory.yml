@@ -3,3 +3,17 @@ servers:
     colvert.colvert.ai:
       ansible_user: root
       ansible_ssh_pass: p0R$raqmpF0c8Dk#&NdYqKHaRQRDScdT0XNAtT^ZDR4085Kj$WDs^UbdhPTgA6*X
+      # Traefik Configuration
+      traefik_domain: colvert.ai
+      traefik_email: web@colvert.ai
+      traefik_auth_users:
+        - username: Geoffroy
+          password: $apr1$qih91p2b$0VXS0o7WHovjBl7lmSgkp/
+        - username: souka
+          password: $apr1$d2ib0pql$lKemxpz59PN4zAngIGhHf/
+        - username: poriol
+          password: $apr1$rl68ynp4$0yOkzZDYVFtKEDzGyAskC/
+      # Portainer Configuration
+      portainer_edge_id: dd5b5e19-30d4-4233-a752-2906cdca8c22
+      portainer_edge_key: aHR0cHM6Ly9wb3J0YWluZXIuaW5mcmEuY29sdmVydC5haXxlZGdlLmluZnJhLmNvbHZlcnQuYWk6ODAwMHwyWHJCcVFVaUhJM2FMb2svemg0Y1NsSEk5NEVMbUM5STdIUG5JenFEMlhzPXwyMQ
+      portainer_domain: portainer.jenkins.colvert.ai
