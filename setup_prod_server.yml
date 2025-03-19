@@ -106,14 +106,14 @@
         driver: bridge
 
     - name: Start Traefik container
-      docker_compose:
+      community.docker.docker_compose_v2:
         project_src: /opt/containers/traefik
         state: present
         build: no
         remove_orphans: yes
 
     - name: Start Portainer container
-      docker_compose:
+      community.docker.docker_compose_v2:
         project_src: /opt/containers/portainer
         state: present
         build: no
