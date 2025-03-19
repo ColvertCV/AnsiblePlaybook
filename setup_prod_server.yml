@@ -105,6 +105,11 @@
         state: present
         driver: bridge
 
+    - name: Create Portainer agent data volume
+      docker_volume:
+        name: portainer_agent_data
+        state: present
+
     - name: Start Traefik container
       community.docker.docker_compose_v2:
         project_src: /opt/containers/traefik
