@@ -69,3 +69,10 @@
         state: directory
         mode: '0755'
       when: not containers_dir.stat.exists
+
+    - name: Copy containers directory contents
+      copy:
+        src: containers/
+        dest: /opt/containers/
+        mode: '0755'
+        recursive: true
