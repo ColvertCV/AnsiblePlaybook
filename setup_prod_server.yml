@@ -2,6 +2,8 @@
 - name: Setup Server
   hosts: servers
   become: true
+  vars_files:
+    - containers/vars.yml
   tasks:
     - name: Check if Docker is installed
       command: which docker
@@ -74,4 +76,16 @@
       copy:
         src: containers/
         dest: /opt/containers/
+        mode: '0755'
+
+    - name: Process Traefik compose file
+      template:
+        src: /opt/containers/traefik/compose.yml
+        dest: /opt/containers/traefik/compose.yml
+        mode: '0755'
+
+    - name: Process Portainer compose file
+      template:
+        src: /opt/containers/portainer/compose.yml
+        dest: /opt/containers/portainer/compose.yml
         mode: '0755'
