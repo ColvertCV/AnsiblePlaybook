@@ -10,7 +10,7 @@ This Ansible playbook checks if Docker is installed on an Ubuntu server and inst
 
 ## Configuration
 
-1. Edit the `inventory` file and replace `YOUR_SERVER_IP` with your actual server IP address.
+1. Edit the `inventory.yml` file and replace `colvert.colvert.ai` with your actual server hostname or IP address.
 
 2. Make sure your SSH private key named `server` is in the same directory as the playbook.
 
@@ -19,7 +19,7 @@ This Ansible playbook checks if Docker is installed on an Ubuntu server and inst
 To run the playbook:
 
 ```bash
-ansible-playbook -i inventory docker_install.yml
+ansible-playbook -i inventory.yml docker_install.yml
 ```
 
 ## What the Playbook Does
