@@ -1,6 +1,6 @@
 ---
 # Traefik Configuration
-traefik_domain: "traefik.colvert.colvert.ai"
+traefik_domain: traefik.langfuse.colvert.ai
 traefik_auth_users:
   - username: Geoffroy
     password: $apr1$qih91p2b$0VXS0o7WHovjBl7lmSgkp/
@@ -12,7 +12,7 @@ traefik_auth_users:
 # Portainer Configuration
 portainer_edge_id: 55619b3a-94e2-4018-8288-de0b785fd407
 portainer_edge_key: aHR0cHM6Ly9wb3J0YWluZXIuaW5mcmEuY29sdmVydC5haXxlZGdlLmluZnJhLmNvbHZlcnQuYWk6ODAwMHwyWHJCcVFVaUhJM2FMb2svemg0Y1NsSEk5NEVMbUM5STdIUG5KenFEMlhzPXwyMg
-portainer_domain: "portainer.colvert.colvert.ai"
+portainer_domain: portainer.jenkins.colvert.ai
 
 # Common Configuration
 docker_network: colvert 
