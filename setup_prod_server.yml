@@ -98,3 +98,23 @@
         state: directory
         mode: '0755'
       when: not containers_dir.stat.exists
+
+    - name: Create Docker network colvert
+      docker_network:
+        name: colvert
+        state: present
+        driver: bridge
+
+    - name: Start Traefik container
+      docker_compose:
+        project_src: /opt/containers/traefik
+        state: present
+        build: no
+        remove_orphans: yes
+
+    - name: Start Portainer container
+      docker_compose:
+        project_src: /opt/containers/portainer
+        state: present
+        build: no
+        remove_orphans: yes
