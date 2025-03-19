@@ -1,5 +1,5 @@
 ---
-- name: Check and Install Docker on Ubuntu
+- name: Setup Server
   hosts: servers
   become: true
   tasks:
@@ -57,3 +57,15 @@
         state: started
         enabled: true
       when: docker_check.rc != 0
+      
+    - name: Check if containers directory exists
+      stat:
+        path: /opt/containers
+      register: containers_dir
+
+    - name: Create containers directory
+      file:
+        path: /opt/containers
+        state: directory
+        mode: '0755'
+      when: not containers_dir.stat.exists
