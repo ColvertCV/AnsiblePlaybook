@@ -3,6 +3,24 @@ servers:
     colvert.colvert.ai:
       ansible_user: root
       ansible_ssh_pass: p0R$raqmpF0c8Dk#&NdYqKHaRQRDScdT0XNAtT^ZDR4085Kj$WDs^UbdhPTgA6*X
+      # Environment Configuration
+      environment: production
+      agency: colvert
+      base_domain: colvert.ai
+      staging_domain: staging.colvert.ai
+
+      # Service Domains
+      sms_domain: "sms.{{ agency }}.{{ environment }}.{{ base_domain }}"
+      agencies_domain: "agencies.{{ agency }}.{{ environment }}.{{ base_domain }}"
+      frontend_domain: "cv.{{ agency }}.{{ environment }}.{{ base_domain }}"
+      api_domain: "api.{{ agency }}.{{ environment }}.{{ base_domain }}"
+      generate_cv_domain: "generate-cv.{{ agency }}.{{ environment }}.{{ base_domain }}"
+      supabase_domain: "supabase.{{ agency }}.{{ environment }}.{{ base_domain }}"
+      soketi_domain: "soketi.{{ agency }}.{{ environment }}.{{ base_domain }}"
+
+      # Network Configuration
+      network_name: colvertcv_network
+
       # Traefik Configuration
       traefik_domain: traefik.colvert.colvert.ai
       traefik_email: web@colvert.ai
@@ -13,6 +31,26 @@ servers:
           password: $apr1$d2ib0pql$lKemxpz59PN4zAngIGhHf/
         - username: poriol
           password: $apr1$rl68ynp4$0yOkzZDYVFtKEDzGyAskC/
+      entrypoint: websecure
+      cert_resolver: colvertresolver
+
+      # Supabase Configuration
+      postgres_password: your_postgres_password
+      jwt_secret: your_jwt_secret
+      anon_key: your_anon_key
+      service_role_key: your_service_role_key
+      supabase_key: your_supabase_key
+
+      # Soketi Configuration
+      soketi_app_id: app-id
+      soketi_app_key: app-key
+      soketi_app_secret: app-secret
+
+      # API Configuration
+      node_env: "{{ environment }}"
+      port: 3000
+      api_url: "http://api_cv:{{ port }}"
+
       # Portainer Configuration
       portainer_edge_id: 55619b3a-94e2-4018-8288-de0b785fd407
       portainer_edge_key: aHR0cHM6Ly9wb3J0YWluZXIuaW5mcmEuY29sdmVydC5haXxlZGdlLmluZnJhLmNvbHZlcnQuYWk6ODAwMHwyWHJCcVFVaUhJM2FMb2svemg0Y1NsSEk5NEVMbUM5STdIUG5KenFEMlhzPXwyMg
