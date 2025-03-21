@@ -15,14 +15,14 @@
         dest: /opt/containers/colvertcv/
         mode: '0755'
 
-    - name: Create .env file from template
+    - name: Generate .env file from template
       template:
         src: colvertcv/.env.j2
         dest: /opt/containers/colvertcv/.env
         mode: '0644'
         owner: root
         group: root
-
+        
     - name: Create compose.yml from template
       template:
         src: colvertcv/compose.yml
