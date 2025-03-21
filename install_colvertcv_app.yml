@@ -18,23 +18,23 @@
 
     - name: Create .env file from template
       template:
-        src: colvertcv/.env
+        src: colvertcv/.env.j2
         dest: /opt/containers/colvertcv/.env
         mode: '0644'
         owner: root
         group: root
 
-    - name: Create docker-compose.yml from template
+    - name: Create compose.yml from template
       template:
-        src: colvertcv/docker-compose.yml
-        dest: /opt/containers/colvertcv/docker-compose.yml
+        src: colvertcv/compose.yml
+        dest: /opt/containers/colvertcv/compose.yml
         mode: '0644'
         owner: root
         group: root
 
     - name: Start ColvertCV containers
-      docker_compose:
+      community.docker.docker_compose_v2:
         project_src: /opt/containers/colvertcv
         state: present
         build: yes
-        remove_orphans: yes 
+        remove_orphans: yes
